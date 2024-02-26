@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Alquiler</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+          background: linear-gradient(to right, #36D1DC, #5B86E5);
+          color: #000000;
+      }
+      img{
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-light d-flex align-items-center justify-content-center"
+    style="height: 100vh"
+  >
+    <div class="container mt-5 p-4 bg-white rounded shadow">
+      <h1 class="mb-4">Editar Alquiler</h1>
+
+      <form
+        action="/api/v1/alquileres/<%= alquiler.NIF %>?_method=PUT"
+        method="POST"
+      >
+        <!-- Grupo de entrada para el Precio -->
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio:</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input
+              type="text"
+              id="precio"
+              name="precio"
+              class="form-control"
+              value="<%= alquiler.precio %>"
+            />
+          </div>
+        </div>
+
+        <!-- Grupo de entrada para la Marca -->
+        <div class="mb-3">
+          <label for="marca" class="form-label">Marca:</label>
+          <input
+            type="text"
+            id="marca"
+            name="marca"
+            class="form-control"
+            value="<%= alquiler.marca %>"
+          />
+        </div>
+
+        <!-- Grupo de entrada para el Modelo -->
+        <div class="mb-3">
+          <label for="modelo" class="form-label">Modelo:</label>
+          <input
+            type="text"
+            id="modelo"
+            name="modelo"
+            class="form-control"
+            value="<%= alquiler.modelo %>"
+          />
+        </div>
+
+        <!-- Grupo de entrada para la Fecha de Recogida -->
+        <div class="mb-3">
+          <label for="fecha_recogida" class="form-label">Recogida:</label>
+          <input
+            type="text"
+            id="fecha_recogida"
+            name="fecha_recogida"
+            class="form-control"
+            value="<%= alquiler.fecha_recogida %>"
+          />
+        </div>
+
+        <!-- Grupo de entrada para la Fecha de Devolución -->
+        <div class="mb-3">
+          <label for="fecha_devolucion" class="form-label">Devolución:</label>
+          <input
+            type="text"
+            id="fecha_devolucion"
+            name="fecha_devolucion"
+            class="form-control"
+            value="<%= alquiler.fecha_devolucion %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="URL" class="form-label">URL de imagen:</label>
+          <input
+            type="text"
+            id="fecha_devolucion"
+            name="URL"
+            class="form-control"
+            value="<%= alquiler.URL %>"
+          />
+        </div>
+        <img src="<%= alquiler.URL %>" alt="">
+        <br>
+        <br>
+
+        <!-- Botón para guardar cambios -->
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
+        <!-- Botón para cancelar -->
+        <a href="/index" class="btn btn-secondary ms-2">Volver al listado</a>
+      </form>
+
+      <!-- Alerta informativa -->
+      <div class="alert alert-info mt-4" role="alert">
+        ¡Recuerda revisar cuidadosamente antes de guardar los cambios!
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

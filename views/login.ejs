@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5d2b8;
+        font-family: "Roboto", sans-serif;
+        background-image: url("https://fotografias.lasexta.com/clipping/cmsimages01/2018/02/27/42118892-F641-4C7B-B2C4-183207F31C62/98.jpg?crop=1139,641,x150,y0&width=1900&height=1069&optimize=high&format=webply");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .container {
+        width: 400px;
+        background-image: url("");
+        background-size: cover;
+        background-position: center;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h2 {
+        margin-bottom: 20px;
+        color: black;
+        position: relative;
+      }
+
+      label,
+      input {
+        display: block;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: calc(100% - 3px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .button {
+        width: 100%;
+        padding: 10px;
+        background-color: #f6ff00ae;
+        color: #000000;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-align: center;
+      }
+      .button:hover {
+        background-color: #f6ff009f;
+      }
+
+      /* Estilos para el botón "Entrar con Google" */
+      .button-google {
+        width: 100%;
+        padding: 10px;
+        background-color: #000000; /* Color negro */
+        color: #ffffff; /* Texto en color blanco */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-align: center;
+        transition: background-color 0.3s; /* Transición suave para el cambio de color */
+      }
+
+      .button-google:hover {
+        background-color: #666666; /* Cambio de color al pasar el cursor */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Iniciar sesión en Gestor</h2>
+      <form action="/" method="POST">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required />
+        <input type="submit" value="Iniciar sesión" class="button" />
+      </form>
+      <div class="buttons-container">
+        <button
+          class="button"
+          type="button"
+          onclick="window.location.href='/reg'"
+        >
+          Registrar Nuevo Usuario
+        </button>
+        <button
+          class="button"
+          type="button"
+          onclick="window.location.href='/main'"
+        >
+          Entrar como invitado
+        </button>
+        <!-- Botón "Entrar con Google" -->
+        <button
+          class="button-google"
+          onclick="window.location.href='/auth/google'"
+        >
+          Entrar con Google
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

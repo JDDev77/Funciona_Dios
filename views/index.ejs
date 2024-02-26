@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Alquileres y Usuarios</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-image: url('https://fotografias.lasexta.com/clipping/cmsimages01/2018/02/27/42118892-F641-4C7B-B2C4-183207F31C62/98.jpg?crop=1139,641,x150,y0&width=1900&height=1069&optimize=high&format=webply');
+            color: #000000;
+            background-attachment: fixed; /* Fija la imagen de fondo */
+        }
+        .buttonCart{
+            background-color: #333333ae;
+        }
+        .btn-custom {
+            background-color: #333333ae; /* Azul Bootstrap por defecto, cámbialo por tu color */
+            color: rgb(255, 255, 255);
+             /* Asegúrate de que el texto sea legible con el color de fondo */
+        }
+        .list-group-item {
+            border-radius: 15px; /* Bordes redondeados */
+            margin-bottom: 10px; /* Espacio entre elementos de la lista */
+        }
+        /* Bordes redondeados para las listas */
+        .coches-list,
+        .usuarios-list {
+            border-radius: 15px;
+            overflow: hidden
+         } /* Asegura que el contenido redondeado no se desborde */
+        img{
+           width: 50px; 
+        }
+        .img_Coche{
+          width: 250px;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a href="/main">
+          <img src="./img/DALL_E-2024-02-17-19.15-removebg-preview.png" alt="RoadRunners Rental Company" class="navbar-brand">
+      </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index">COCHES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:3000">MOTOS</a>
+            </li>
+            <% if(usLogin != null){ %> <% if(usLogin.profile == "ADMIN"){%>
+            <li class="nav-item">
+              <a class="nav-link" href="/area-personal">ÁREA PERSONAL</a>
+            </li>
+            <%}%> <%}%>
+          </ul>
+          <% if(usLogin == null){ %>
+          <span class="navbar-text">
+            <form action="/" method="GET" class="d-flex">
+              <button type="submit" class="btn btn-outline-danger">
+                Login
+              </button>
+            </form>
+          </span>
+          <span class="navbar-text">
+            <form action="/reg" method="GET" class="d-flex">
+              <button type="submit" class="btn btn-outline-danger">
+                Register
+              </button>
+            </form>
+          </span>
+          <%}%> <% if(usLogin != null){ %>
+          <span class="navbar-text">
+            <form action="/logout" method="GET" class="d-flex">
+              <button type="submit" class="btn btn-outline-danger">
+                Logout
+              </button>
+            </form>
+          </span>
+          <%}%>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <% if(usLogin != null){ %>
+      <h2>Bienvenid@: <%= usLogin.username %></h2>
+      <% } %>
+
+      <!-- Contenido de Coches de Alquiler -->
+      <h1 class="mb-3">Coches de Alquiler</h1>
+      <ul class="list-group coches-list mb-3">
+        <% alquileres.forEach(alquiler => { %>
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1"><%= alquiler.marca %> <%= alquiler.modelo %></h5>
+              <p><b>Precio Hora:</b> <%= alquiler.precio %><br /></p>
+              <img class="img_Coche" src="<%= alquiler.URL %>" />
+            </div>
+            <div class="d-flex">
+              <% if(usLogin != null){ %> <% if(usLogin.profile == "ADMIN"){%>
+              <form
+                action="/api/v1/alquileres/<%= alquiler.NIF %>/edit"
+                method="GET"
+              >
+                <button type="submit" class="btn btn-custom me-2">
+                  Editar
+                </button>
+              </form>
+              <% } %> <%}%>
+              <form
+                action="/api/v1/alquileres/<%= alquiler.NIF %>/show"
+                method="GET"
+              >
+                <button type="submit" class="btn btn-custom me-2">
+                  Mostrar
+                </button>
+              </form>
+              <% if(usLogin != null){ %>
+              <form
+                method="GET"
+                action="/api/v1/alquileres/add-to-cart/<%= alquiler.NIF %>"
+              >
+                <button id="sweet" type="submit" class="btn btn-custom">
+                  Agregar al carrito
+                </button>
+              </form>
+              <%}%>
+            </div>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+      <% if(usLogin != null){ %> <% if(usLogin.profile == "ADMIN"){%>
+      <a
+        href="/api/v1/alquileres/create/newAlquiler"
+        class="btn btn-custom mb-3"
+        >Crear Nuevo Alquiler</a
+      >
+      <% } %> <% } %> <% if(usLogin != null){ %>
+      <a
+        href="/api/v1/alquileres/ver/carrito"
+        class="btn btn-custom buttonCart mb-3"
+        >Ver Carrito</a
+      >
+      <%}%>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/server/utils/functions.js"></script>
+  </body>
+</html>

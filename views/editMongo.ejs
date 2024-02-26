@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Usuario</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+          background: linear-gradient(to right, #36D1DC, #5B86E5);
+          color: #000000
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5 p-4 bg-white rounded shadow-lg">
+      <h1 class="mb-4 text-center">Editar Usuario</h1>
+
+      <form
+        action="/api/v1/usuarios/<%= usuario.nif %>?_method=PATCH"
+        method="POST"
+      >
+        <!-- Grupo de entrada para el NIF -->
+        <div class="mb-3">
+          <label for="nif" class="form-label">NIF del Usuario:</label>
+          <input
+            type="text"
+            id="nif"
+            name="nif"
+            class="form-control"
+            value="<%= usuario.nif %>"
+            readonly
+          />
+        </div>
+
+        <!-- Grupo de entrada para el Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre del Usuario:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="form-control"
+            value="<%= usuario.nombre %>"
+            required
+          />
+        </div>
+
+        <!-- Grupo de entrada para los Apellidos -->
+        <div class="mb-3">
+          <label for="apellidos" class="form-label"
+            >Apellidos del Usuario:</label
+          >
+          <input
+            type="text"
+            id="apellidos"
+            name="apellidos"
+            class="form-control"
+            value="<%= usuario.apellidos %>"
+            required
+          />
+        </div>
+
+        <!-- Grupo de entrada para la Fecha de Nacimiento -->
+        <div class="mb-3">
+          <label for="fechaNac" class="form-label"
+            >Fecha de Nacimiento del Usuario:</label
+          >
+          <input
+            type="date"
+            id="fechaNac"
+            name="fechaNac"
+            class="form-control"
+            value="<%= usuario.fechaNac %>"
+            required
+          />
+        </div>
+
+        <!-- Botón para guardar cambios -->
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      </form>
+
+      <div class="alert alert-info mt-4" role="alert">
+        ¡Recuerda revisar cuidadosamente antes de guardar los cambios!
+      </div>
+
+      <!-- Enlace para volver al listado de usuarios -->
+      <a href="/area-personal" class="btn btn-secondary mt-3"
+        >Volver al listado de usuarios</a
+      >
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

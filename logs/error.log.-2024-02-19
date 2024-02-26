@@ -1,0 +1,2 @@
+[2024-02-19T11:45:58.749] [ERROR] error - 500 ER_DUP_ENTRY: Duplicate entry '030303030' for key 'PRIMARY'
+[2024-02-19T11:46:21.458] [ERROR] error - 500 ER_DUP_ENTRY: Duplicate entry '030303030' for key 'PRIMARY'
